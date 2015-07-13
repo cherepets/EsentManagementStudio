@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="EsentManagementStudio.ObjectExplorer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:EsentManagementStudio.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Margin="10,10,0,10">OBJECT EXPLORER</TextBlock>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5,0">
+            <controls:VisualButton Margin="5,0" ToolTip="Create database" Visual="{StaticResource appbar_page_new}" Click="CreateDb_Click"/>
+            <controls:VisualButton Margin="5,0" ToolTip="Attach database" Visual="{StaticResource appbar_connect}" Click="OpenDb_Click"/>
+            <controls:VisualButton Margin="5,0" ToolTip="Detach database" Visual="{StaticResource appbar_close}" Click="CloseDb_Click"/>
+        </StackPanel>
+        <TreeView x:Name="DatabasesView" ItemsSource="{Binding 'Databases'}" Margin="0,10,0,0" SelectedItemChanged="DatabasesView_SelectedItemChanged">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding 'Tables.Values'}">
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                        <!-- Database context menu -->
+                        <StackPanel.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="New query" Click="Menu_NewQuery_Click"/>
+                                <Separator/>
+                                <MenuItem Header="Tables">
+                                    <MenuItem Header="New" Click="Menu_NewTable_Click"/>
+                                    <MenuItem Header="Show" Click="Menu_ShowTable_Click"/>
+                                    <MenuItem Header="Drop" Click="Menu_DropTable_Click"/>
+                                </MenuItem>
+                                <Separator/>
+                                <MenuItem Header="Refresh" Click="Menu_RefreshDb_Click"/>
+                                <MenuItem Header="Detach database" Click="Menu_CloseDb_Click"/>
+                            </ContextMenu>
+                        </StackPanel.ContextMenu>
+                        <controls:VisualIcon Visual="{StaticResource appbar_database}"/>
+                        <TextBlock Text="{Binding 'Name'}" Margin="5,0,0,0"/>
+                    </StackPanel>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding 'Columns.Values'}">
+                            <StackPanel Orientation="Horizontal" Background="Transparent">
+                                <!-- Table context menu -->
+                                <StackPanel.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Data">
+                                            <MenuItem Header="Select top" Click="Menu_SelectTop_Click"/>
+                                            <MenuItem Header="Select exact" Click="Menu_SelectExact_Click"/>
+                                            <MenuItem Header="Select by condition" Click="Menu_SelectCondition_Click"/>
+                                            <Separator/>
+                                            <MenuItem Header="Count rows" Click="Menu_CountRows_Click"/>
+                                            <Separator/>
+                                            <MenuItem Header="Insert" Click="Menu_InsertData_Click"/>
+                                            <MenuItem Header="Update" Click="Menu_UpdateData_Click"/>
+                                            <MenuItem Header="Delete" Click="Menu_DeleteData_Click"/>
+                                        </MenuItem>
+                                        <Separator/>
+                                        <MenuItem Header="Columns">
+                                            <MenuItem Header="New" Click="Menu_NewColumn_Click"/>
+                                            <MenuItem Header="Show" Click="Menu_ShowColumn_Click"/>
+                                            <MenuItem Header="Drop" Click="Menu_DropColumn_Click"/>
+                                        </MenuItem>
+                                        <MenuItem Header="Indexes">
+                                            <MenuItem Header="New" Click="Menu_NewIndex_Click"/>
+                                            <MenuItem Header="Show" Click="Menu_ShowIndex_Click"/>
+                                            <MenuItem Header="Drop" Click="Menu_DropIndex_Click"/>
+                                        </MenuItem>
+                                        <Separator/>
+                                        <MenuItem Header="Drop table" Click="Menu_DropTable_Click"/>
+                                    </ContextMenu>
+                                </StackPanel.ContextMenu>
+                                <controls:VisualIcon Visual="{StaticResource appbar_list}"/>
+                                <TextBlock Text="{Binding 'Name'}" Margin="5,0,0,0"/>
+                            </StackPanel>
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                                        <StackPanel.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="Drop column" Click="Menu_DropColumn_Click"/>
+                                            </ContextMenu>
+                                        </StackPanel.ContextMenu>
+                                        <controls:VisualIcon Visual="{StaticResource appbar_column_one}"/>
+                                        <TextBlock Text="{Binding 'Name'}" Margin="5,0,0,0"/>
+                                        <TextBlock Text="{Binding 'ColumnType.Name'}" Margin="10,0,0,0">
+                                            <TextBlock.Foreground>
+                                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}"/>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </DockPanel>
+</UserControl>

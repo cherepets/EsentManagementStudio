@@ -1,0 +1,60 @@
+﻿<controls:MetroWindow x:Class="EsentManagementStudio.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:local="clr-namespace:EsentManagementStudio"
+                      mc:Ignorable="d"
+                      WindowStartupLocation="CenterScreen"
+                      BorderBrush="Black" Background="WhiteSmoke" BorderThickness="1"
+                      Title="ESENT MANAGEMENT STUDIO" Height="480" Width="720" Closed="MetroWindow_Closed">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <local:ObjectExplorer x:Name="ObjectExplorer" DockPanel.Dock="Left" Grid.Row="0" Grid.Column="0"
+                              NewQuery="ObjectExplorer_OnNewQuery"
+                              
+                              CreateDb="ObjectExplorer_OnCreateDb"
+                              OpenDb="ObjectExplorer_OnOpenDb"
+                              CloseDb="ObjectExplorer_OnCloseDb"
+                              RefreshDb="QueryEditor_OnRefreshDb"
+
+                              NewTable="ObjectExplorer_OnNewTable"
+                              ShowTable="ObjectExplorer_OnShowTable"
+                              DropTable="ObjectExplorer_OnDropTable"
+
+                              SelectTop="ObjectExplorer_OnSelectTop"
+                              SelectExact="ObjectExplorer_OnSelectExact"
+                              SelectCondition="ObjectExplorer_OnSelectCondition"
+                              CountRows="ObjectExplorer_OnCountRows"
+                              InsertData="ObjectExplorer_OnInsertData"
+                              UpdateData="ObjectExplorer_OnUpdateData"
+                              DeleteData="ObjectExplorer_OnDeleteData"
+
+                              NewColumn="ObjectExplorer_OnNewColumn"
+                              ShowColumn="ObjectExplorer_OnShowColumn"
+                              DropColumn="ObjectExplorer_OnDropColumn"
+
+                              NewIndex="ObjectExplorer_OnNewIndex"
+                              ShowIndex="ObjectExplorer_OnShowIndex"
+                              DropIndex="ObjectExplorer_OnDropIndex"
+
+                              SelectedItemChanged="ObjectExplorer_OnSelectedItemChanged" />
+        <local:QueryEditor x:Name="QueryEditor" DockPanel.Dock="Right" Grid.Row="0" Grid.Column="1" />
+        <local:PropertyEditor x:Name="PropertyEditor" DockPanel.Dock="Left" Grid.Row="0" Grid.Column="2" />
+        <GridSplitter Width="5" Grid.Row="0" Grid.Column="0"
+                      BorderThickness="2,0" Margin="0,0,-2,0" Background="Black" BorderBrush="Transparent" />
+        <GridSplitter Width="5" Grid.Row="0" Grid.Column="1"
+                      BorderThickness="2,0" Margin="0,0,-2,0" Background="Black" BorderBrush="Transparent" />
+        <StatusBar x:Name="Status" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Bottom"
+                   Foreground="White" />
+    </Grid>
+</controls:MetroWindow>
