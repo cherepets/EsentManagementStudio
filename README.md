@@ -1,0 +1,2 @@
+# EsentManagementStudio
+Esent Management Studio
