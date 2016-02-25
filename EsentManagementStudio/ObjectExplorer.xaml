@@ -41,6 +41,8 @@
                                 <!-- Table context menu -->
                                 <StackPanel.ContextMenu>
                                     <ContextMenu>
+                                        <MenuItem Header="Generate class" Click="Menu_GenerateClass_Click"/>
+                                        <Separator/>
                                         <MenuItem Header="Data">
                                             <MenuItem Header="Select top" Click="Menu_SelectTop_Click"/>
                                             <MenuItem Header="Select exact" Click="Menu_SelectExact_Click"/>

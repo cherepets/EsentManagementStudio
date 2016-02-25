@@ -7,6 +7,7 @@ using System.Windows.Media;
 using EsentManagementStudio.Extensions;
 using FourToolkit.Esent;
 using Microsoft.Win32;
+using System.Text;
 
 namespace EsentManagementStudio
 {
@@ -121,6 +122,21 @@ namespace EsentManagementStudio
                 .With("table.Name", table?.Name));
         }
         #endregion
+        
+        private void ObjectExplorer_OnGenerateClass(object sender, RoutedEventArgs e)
+        {
+            var table = sender as EsentTable;
+            if (table == null) return;
+            var codeBuilder = new StringBuilder();
+            foreach (var col in table.Columns.Values)
+                codeBuilder.AppendLine(CodeConstants.Property
+                    .With("type", col.ColumnType.Name)
+                    .With("column.Name", col.Name));
+            QueryEditor.NewSession(table.Database.Name, CodeConstants.ClassHeader
+                .With("namespace", table.Database.Name)
+                .With("table.Name", table.Name)
+                .With("code", codeBuilder.ToString()));
+        }
 
         #region Data
         private void ObjectExplorer_OnSelectTop(object sender, RoutedEventArgs e)

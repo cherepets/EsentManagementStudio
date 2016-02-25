@@ -17,6 +17,7 @@ namespace EsentManagementStudio
         public event RoutedEventHandler ShowTable;
         public event RoutedEventHandler DropTable;
 
+        public event RoutedEventHandler GenerateClass;
         public event RoutedEventHandler SelectTop;
         public event RoutedEventHandler SelectExact;
         public event RoutedEventHandler SelectCondition;
@@ -94,6 +95,13 @@ namespace EsentManagementStudio
                 DropTable?.Invoke(context, e);
         }
         #endregion
+        
+        private void Menu_GenerateClass_Click(object sender, RoutedEventArgs e)
+        {
+            var context = sender.GetDataContext();
+            if (context != null)
+                GenerateClass?.Invoke(context, e);
+        }
 
         #region Data
         private void Menu_SelectTop_Click(object sender, RoutedEventArgs e)

@@ -31,6 +31,7 @@
                               ShowTable="ObjectExplorer_OnShowTable"
                               DropTable="ObjectExplorer_OnDropTable"
 
+                              GenerateClass="ObjectExplorer_OnGenerateClass"
                               SelectTop="ObjectExplorer_OnSelectTop"
                               SelectExact="ObjectExplorer_OnSelectExact"
                               SelectCondition="ObjectExplorer_OnSelectCondition"

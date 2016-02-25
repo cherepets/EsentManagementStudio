@@ -47,6 +47,19 @@
     }).Invoke()";
         #endregion
 
+        public const string Property =
+@"        public {type} {column.Name} { get; set; }";
+
+        public const string ClassHeader =
+@"using System;
+
+namespace {namespace}
+{
+    public class {table.Name}
+    {
+{code}    }
+}";
+
         #region Data
         public const string SelectTopScript =
 @"db.Tables[""{table.Name}""].SelectFirstRows({count})";
